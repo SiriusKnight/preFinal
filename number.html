@@ -3,32 +3,47 @@
     <body>
         <form name="form">
             Input: <input type="number" name="number" placeholder="Enter a number">
-            <input type="button" value="Submit" onclick="prime()">
+            <input type="button" value="Submit" onclick="checkAndDisplay()">
         </form>
-        <script>
-            function prime() {
-                var a = parseInt(document.form.number.value);
-                var result = a % 2 === 0 ? "Even" : "Odd";
-                var message = a + " is prime number";
-                document.getElementById("result").innerHTML = message;
-
-                var evenum = "";
-                var oddNum = "";
-
-                for (var i = 1; i <= a; i++) {
-                    if (i % 2 === 1) {
-                        evenum += i + " ";
-                    } else {
-                        oddNum += i + " ";
-                    }
-                }
-
-                document.getElementById("even").innerHTML = "Even numbers: " + evenum.trim();
-                document.getElementById("odd").innerHTML = "Odd numbers: " + oddNum.trim();
-            }
-        </script>
         <p id="result"></p>
         <p id="even"></p>
         <p id="odd"></p>
+        <script>
+            function isPrime(num) {
+                if (num <= 1) return false;
+                for (var i = 2; i <= Math.sqrt(num); i++) {
+                    if (num % i === 0) return false;
+                }
+                return true;
+            }
+
+            function checkAndDisplay() {
+                var a = parseInt(document.form.number.value);
+
+                if (isPrime(a)) {
+                    var result = a % 2 === 0 ? "Even" : "Odd";
+                    var message = a + " is a prime number";
+                    document.getElementById("result").innerHTML = message;
+
+                    var evenNum = "";
+                    var oddNum = "";
+
+                    for (var i = 1; i <= a; i++) {
+                        if (i % 2 === 1) {
+                            evenNum += i + " ";
+                        } else {
+                            oddNum += i + " ";
+                        }
+                    }
+
+                    document.getElementById("even").innerHTML = "Even numbers: " + evenNum.trim();
+                    document.getElementById("odd").innerHTML = "Odd numbers: " + oddNum.trim();
+                } else {
+                    document.getElementById("result").innerHTML = a + " is not a prime number";
+                    document.getElementById("even").innerHTML = "";
+                    document.getElementById("odd").innerHTML = "";
+                }
+            }
+        </script>
     </body>
 </html>
